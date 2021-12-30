@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-// import  Text from './Text';
+import { Route, Switch, Redirect } from 'react-router';
+
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
+import SignIn from './SigIn';
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +18,15 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <AppBar />
-      <RepositoryList />
+      <Switch>
+        <Route path='/' exact>
+          <RepositoryList />
+        </Route>
+        <Route path='/signin' exact>
+          <SignIn />
+        </Route>
+        <Redirect to='/' /> {/*Only one redirection needed*/}
+      </Switch>
     </View>
   );
 };
