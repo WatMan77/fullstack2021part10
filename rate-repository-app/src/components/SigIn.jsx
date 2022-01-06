@@ -6,6 +6,7 @@ import theme from '../theme';
 
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
+import useSignIn from '../../hooks/useSignIn';
 
 const SignForm = ({ onSubmit }) => {
 
@@ -33,9 +34,20 @@ const SignForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-    const onSubmit = (props) => {
+
+    const [signIn] = useSignIn()
+
+    const onSubmit = async(props) => {
         console.log(props)
+        const { username, password } = props
+
+        try {
+            const { data } = await signIn({ username, password })
+        } catch (e) {
+            console.log(e);
+        }
     }
+
 
     const initialValues = {
         username: '',
